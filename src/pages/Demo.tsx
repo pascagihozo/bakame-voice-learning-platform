@@ -1,11 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Play, Pause, RotateCcw, Phone, PhoneCall, MessageCircle, Volume2, Award } from "lucide-react";
+import { Play, Pause, RotateCcw, Phone, PhoneCall, MessageCircle, Volume2, Award, Zap, Users, Globe } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import PhoneAnimation from "@/components/PhoneAnimation";
+import ConversationFlow from "@/components/ConversationFlow";
 
 const Demo = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -13,6 +14,7 @@ const Demo = () => {
   const [callDuration, setCallDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [userResponses, setUserResponses] = useState<string[]>([]);
+  const [showConversation, setShowConversation] = useState(false);
 
   const demoSteps = [
     {
@@ -78,6 +80,7 @@ const Demo = () => {
     setCallDuration(0);
     setProgress(0);
     setUserResponses([]);
+    setShowConversation(true);
     toast({
       title: "Demo Started",
       description: "Experience how our AI-powered voice learning works!",
@@ -91,6 +94,7 @@ const Demo = () => {
       setUserResponses([...userResponses, demoSteps[currentStep].userResponse]);
     } else {
       setIsPlaying(false);
+      setShowConversation(false);
       toast({
         title: "Demo Completed!",
         description: "Maria has successfully completed her English lesson.",
@@ -104,6 +108,7 @@ const Demo = () => {
     setCallDuration(0);
     setProgress(0);
     setUserResponses([]);
+    setShowConversation(false);
   };
 
   const formatTime = (seconds: number) => {
@@ -116,20 +121,59 @@ const Demo = () => {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Interactive Demo: AI-Powered Voice Learning
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Experience how Maria, a student in rural Kenya, learns English through our voice-based AI platform 
             using just her feature phone - no internet required.
           </p>
+
+          {/* Demo Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
+              <div className="flex items-center justify-center space-x-2">
+                <Zap className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-blue-800">4 sec response</span>
+              </div>
+            </div>
+            <div className="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg">
+              <div className="flex items-center justify-center space-x-2">
+                <Users className="w-5 h-5 text-green-600" />
+                <span className="text-sm font-medium text-green-800">2.7B potential users</span>
+              </div>
+            </div>
+            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
+              <div className="flex items-center justify-center space-x-2">
+                <Globe className="w-5 h-5 text-purple-600" />
+                <span className="text-sm font-medium text-purple-800">No internet needed</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Phone Interface Simulation */}
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Phone Animation */}
+          <div className="lg:col-span-1">
+            <Card className="border-0 shadow-xl">
+              <CardHeader className="text-center">
+                <CardTitle className="text-lg">Maria's Phone</CardTitle>
+                <CardDescription>Feature Phone Simulation</CardDescription>
+              </CardHeader>
+              <CardContent className="flex justify-center">
+                <PhoneAnimation 
+                  isActive={isPlaying}
+                  currentStep={currentStep}
+                  callDuration={callDuration}
+                />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Main Demo Interface */}
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-t-lg">
@@ -139,7 +183,7 @@ const Demo = () => {
                     <div>
                       <CardTitle>Bakame AI Voice Learning</CardTitle>
                       <CardDescription className="text-blue-100">
-                        Feature Phone Simulation
+                        Interactive Learning Session
                       </CardDescription>
                     </div>
                   </div>
@@ -177,7 +221,7 @@ const Demo = () => {
 
                     {/* Current Step */}
                     <div className="bg-gray-50 rounded-lg p-6">
-                      <div className="flex items-start space-x-4">
+                      <div className="flex items-start space-x-4 mb-4">
                         <div className="bg-blue-100 p-3 rounded-full">
                           {currentStepData.icon}
                         </div>
@@ -188,40 +232,20 @@ const Demo = () => {
                             </h3>
                             <Badge variant="secondary">{currentStepData.type}</Badge>
                           </div>
-                          <p className="text-gray-600 mb-4">{currentStepData.description}</p>
-                          
-                          {/* AI Speech */}
-                          <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <Volume2 className="w-4 h-4 text-blue-600" />
-                              <span className="text-sm font-medium text-blue-700">AI Tutor Says:</span>
-                            </div>
-                            <p className="text-gray-800">{currentStepData.content}</p>
-                          </div>
-
-                          {/* User Response */}
-                          {currentStep > 0 && userResponses[currentStep - 1] && (
-                            <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <MessageCircle className="w-4 h-4 text-green-600" />
-                                <span className="text-sm font-medium text-green-700">Maria Says:</span>
-                              </div>
-                              <p className="text-gray-800">{userResponses[currentStep - 1]}</p>
-                            </div>
-                          )}
-
-                          {/* AI Response */}
-                          {currentStepData.aiResponse && (
-                            <div className="bg-purple-50 border-l-4 border-purple-400 p-4">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <Volume2 className="w-4 h-4 text-purple-600" />
-                                <span className="text-sm font-medium text-purple-700">AI Responds:</span>
-                              </div>
-                              <p className="text-gray-800">{currentStepData.aiResponse}</p>
-                            </div>
-                          )}
+                          <p className="text-gray-600">{currentStepData.description}</p>
                         </div>
                       </div>
+
+                      {/* Live Conversation Animation */}
+                      {showConversation && (
+                        <ConversationFlow
+                          isActive={isPlaying}
+                          currentMessage={currentStepData.content}
+                          userResponse={currentStepData.userResponse}
+                          aiResponse={currentStepData.aiResponse}
+                          stepType={currentStepData.type}
+                        />
+                      )}
                     </div>
 
                     {/* Controls */}
@@ -252,14 +276,14 @@ const Demo = () => {
             </Card>
           </div>
 
-          {/* Info Panel */}
-          <div className="space-y-6">
+          {/* Analytics Panel */}
+          <div className="lg:col-span-1 space-y-6">
             {/* Real-Time Analytics */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Real-Time Analytics</CardTitle>
+                <CardTitle className="text-lg">Live Analytics</CardTitle>
                 <CardDescription>
-                  Data available to teachers and education ministries
+                  Real-time data for educators
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -268,16 +292,49 @@ const Demo = () => {
                   <span className="text-sm font-medium">{formatTime(callDuration)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Vocabulary Words:</span>
-                  <span className="text-sm font-medium">{currentStep + 2}</span>
+                  <span className="text-sm text-gray-600">Words Learned:</span>
+                  <span className="text-sm font-medium">{Math.min(currentStep * 3 + 2, 15)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Comprehension:</span>
-                  <span className="text-sm font-medium">85%</span>
+                  <span className="text-sm font-medium text-green-600">
+                    {Math.min(75 + currentStep * 5, 95)}%
+                  </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Pronunciation:</span>
-                  <span className="text-sm font-medium">Good</span>
+                  <span className="text-sm text-gray-600">Engagement:</span>
+                  <span className="text-sm font-medium text-blue-600">High</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all duration-1000"
+                    style={{ width: `${Math.min(75 + currentStep * 5, 95)}%` }}
+                  ></div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Technical Performance */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">System Performance</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Response Time:</span>
+                  <span className="text-green-600 font-medium">2.1s</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Audio Quality:</span>
+                  <span className="text-green-600 font-medium">Excellent</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Connection:</span>
+                  <span className="text-green-600 font-medium">Stable</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">AI Processing:</span>
+                  <span className="text-blue-600 font-medium">98% Accuracy</span>
                 </div>
               </CardContent>
             </Card>
@@ -288,51 +345,19 @@ const Demo = () => {
                 <CardTitle className="text-lg">Demo Highlights</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">No internet required</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Works on any phone</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">AI adapts to skill level</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Real-time progress tracking</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-sm">Personalized feedback</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Technical Specs */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Technical Details</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div>
-                  <span className="font-medium">Speech Recognition:</span>
-                  <span className="text-gray-600 ml-2">OpenAI Whisper</span>
-                </div>
-                <div>
-                  <span className="font-medium">Language Model:</span>
-                  <span className="text-gray-600 ml-2">GPT-4 Turbo</span>
-                </div>
-                <div>
-                  <span className="font-medium">Response Time:</span>
-                  <span className="text-gray-600 ml-2">&lt;4 seconds</span>
-                </div>
-                <div>
-                  <span className="font-medium">Audio Quality:</span>
-                  <span className="text-gray-600 ml-2">8 kHz optimized</span>
-                </div>
+                {[
+                  "No internet required",
+                  "Works on any phone",
+                  "AI adapts to skill level",
+                  "Real-time progress tracking",
+                  "Personalized feedback",
+                  "24/7 availability"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm">{feature}</span>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </div>

@@ -1,7 +1,6 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mic, Brain, Database, BarChart3, Globe, Zap, MessageCircle, Cloud, Server, Headphones, Users } from "lucide-react";
+import { Phone, Mic, Brain, Database, BarChart3, Globe, Zap, MessageCircle, Cloud, Server, Headphones, Users, Languages, Volume2 } from "lucide-react";
 
 const SystemFlowDiagram = () => {
   return (

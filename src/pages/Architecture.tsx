@@ -1,11 +1,14 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Phone, Brain, Database, BarChart3, Shield, Zap, Globe, Users, Server, Cloud, Lock } from "lucide-react";
-import SystemFlowDiagram from "@/components/SystemFlowDiagram";
+import { Phone, Brain, Database, BarChart3, Shield, Zap, Globe, Users, Server, Cloud, Lock, Languages } from "lucide-react";
+import InteractiveArchitectureDiagram from "@/components/InteractiveArchitectureDiagram";
+import { useState } from "react";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 const Architecture = () => {
+  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -19,11 +22,35 @@ const Architecture = () => {
             at scale across low-bandwidth networks in the Global South.
           </p>
         </div>
-
-        {/* System Flow Diagram */}
-        <section className="mb-16">
-          <SystemFlowDiagram />
-        </section>
+        {/* Simulation Modal Trigger */}
+        <div className="flex justify-center mb-12">
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-lg font-semibold shadow hover:from-blue-700 hover:to-green-700 transition">
+                Simulate System Architecture
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[1600px] min-w-[1200px] w-[90vw] h-[650px] p-0 bg-transparent border-none shadow-none flex flex-col items-center justify-center">
+              <div className="w-full flex flex-col items-center justify-center">
+                <div className="w-full flex justify-end pr-8 pt-4">
+                  <button onClick={() => setExpanded(true)} className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded text-sm font-semibold shadow">Expand View</button>
+                </div>
+                <InteractiveArchitectureDiagram onAutoEnd={() => {}} />
+              </div>
+            </DialogContent>
+          </Dialog>
+          {/* Expanded Modal */}
+          <Dialog open={expanded} onOpenChange={setExpanded}>
+            <DialogContent className="w-[98vw] h-[95vh] max-w-none max-h-none p-0 bg-white border-none shadow-2xl flex flex-col items-center justify-center z-50">
+              <div className="w-full flex flex-col items-center justify-center">
+                <div className="w-full flex justify-end pr-8 pt-4">
+                  <button onClick={() => setExpanded(false)} className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded text-sm font-semibold shadow">Close Expanded View</button>
+                </div>
+                <InteractiveArchitectureDiagram onAutoEnd={() => {}} expanded />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
 
         {/* System Overview */}
         <section className="mb-16">

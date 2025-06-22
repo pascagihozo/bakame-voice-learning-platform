@@ -78,7 +78,7 @@ const Demo = () => {
         kinyarwanda: {
           gradual: "Byiza cyane! Ubu reka twige gusalamuza. 'Good morning' ni nk'uko tuvuga 'Mwaramutse'. Repeat after me: Good morning",
           "english-only": "Very good! Now let's practice greetings. 'Good morning' means 'Mwaramutse'. Repeat after me: Good morning",
-          "native-heavy": "Byiza cyane! Ubu reka twige amagambo yo gusalamuza. 'Good morning' mu Cyongereza ni nk'uko tuvuga 'Mwaramutse' mu Kinyarwanda. Subiramo nyuma yanjye: Good morning"
+          "native-heavy": "Byiza cyane rwose! Ubu reka twige amagambo yo gusalamuza. 'Good morning' mu Cyongereza ni nk'uko tuvuga 'Mwaramutse' mu Kinyarwanda. Subiramo nyuma yanjye: Good morning"
         }
       },
       userResponse: {
@@ -344,43 +344,61 @@ const Demo = () => {
           </p>
 
           {/* Language & Mode Selection */}
-          <div className="space-y-6 mb-8">
+          <div className="space-y-8 mb-8">
             {/* Language Selection */}
-            <div className="flex justify-center space-x-4">
-              {languageOptions.map((lang) => (
-                <Button
-                  key={lang.code}
-                  variant={selectedLanguage === lang.code ? "default" : "outline"}
-                  onClick={() => setSelectedLanguage(lang.code as 'swahili' | 'kinyarwanda')}
-                  className="flex items-center space-x-2 px-6"
-                >
-                  <span className="text-lg">{lang.flag}</span>
-                  <div className="text-left">
-                    <div className="font-medium">{lang.name}</div>
-                    <div className="text-xs opacity-75">{lang.region}</div>
-                  </div>
-                </Button>
-              ))}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Select Your Native Language</h3>
+              <div className="flex justify-center space-x-4">
+                {languageOptions.map((lang) => (
+                  <Button
+                    key={lang.code}
+                    variant={selectedLanguage === lang.code ? "default" : "outline"}
+                    onClick={() => setSelectedLanguage(lang.code as 'swahili' | 'kinyarwanda')}
+                    className="flex items-center space-x-2 px-6"
+                  >
+                    <span className="text-lg">{lang.flag}</span>
+                    <div className="text-left">
+                      <div className="font-medium">{lang.name}</div>
+                      <div className="text-xs opacity-75">{lang.region}</div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
             </div>
 
             {/* Learning Mode Selection */}
             <div className="max-w-2xl mx-auto">
               <h3 className="text-lg font-semibold mb-4">Choose Learning Style</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 {learningModeOptions.map((mode) => (
                   <Button
                     key={mode.value}
                     variant={learningMode === mode.value ? "default" : "outline"}
                     onClick={() => setLearningMode(mode.value as typeof learningMode)}
-                    className="flex flex-col items-center p-4 h-auto"
+                    className="flex flex-col items-center p-6 h-auto"
                   >
                     {mode.icon}
                     <div className="mt-2 text-center">
                       <div className="font-medium">{mode.label}</div>
-                      <div className="text-xs opacity-75 mt-1">{mode.description}</div>
                     </div>
                   </Button>
                 ))}
+              </div>
+              
+              {/* Learning Mode Descriptions - Now moved below the cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="font-medium text-gray-800 mb-1">Gradual Transition</p>
+                  <p>Start with native language, gradually increase English</p>
+                </div>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="font-medium text-gray-800 mb-1">English Focus</p>
+                  <p>Minimal native language, focus on English immersion</p>
+                </div>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="font-medium text-gray-800 mb-1">Native Support</p>
+                  <p>Heavy native language support for beginners</p>
+                </div>
               </div>
             </div>
           </div>

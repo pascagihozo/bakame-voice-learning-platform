@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Play, Pause, RotateCcw, Phone, PhoneCall, MessageCircle, Volume2, Award, Zap, Users, Globe } from "lucide-react";
+import { Play, Pause, RotateCcw, Phone, PhoneCall, MessageCircle, Volume2, Award, Zap, Users, Globe, Languages } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import PhoneAnimation from "@/components/PhoneAnimation";
 import ConversationFlow from "@/components/ConversationFlow";
@@ -15,53 +16,109 @@ const Demo = () => {
   const [progress, setProgress] = useState(0);
   const [userResponses, setUserResponses] = useState<string[]>([]);
   const [showConversation, setShowConversation] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<'swahili' | 'kinyarwanda'>('swahili');
 
   const demoSteps = [
     {
-      title: "Student Dials the Number",
-      description: "Maria, a student in rural Kenya, dials the toll-free education number on her feature phone.",
-      content: "Welcome to Bakame AI English Learning! Please say your student ID or press 1 for new students.",
-      userResponse: "Student ID 12345",
-      aiResponse: "Hello Maria! Welcome back. Today we'll continue with Lesson 5: Daily Conversations.",
-      icon: <PhoneCall className="w-6 h-6" />,
-      type: "call"
+      title: "Language Detection & Welcome",
+      description: "Maria calls and speaks in Swahili. AI detects her native language and responds accordingly.",
+      content: {
+        swahili: "Karibu kwenye Bakame AI! Nitakusaidia kujifunza Kiingereza. Je, umeanza kujifunza Kiingereza?",
+        english: "Welcome to Bakame AI! I'll help you learn English. Have you started learning English before?"
+      },
+      userResponse: {
+        swahili: "Nimeanza kidogo lakini ni mgumu sana",
+        english: "I have started a little but it's very difficult"
+      },
+      aiResponse: {
+        swahili: "Hakuna shida! Tutaanza polepole. Let me teach you step by step. Sema 'Hello' - maana yake ni 'Hujambo'",
+        english: "No problem! We'll start slowly. Let me teach you step by step. Say 'Hello' - it means 'Hujambo'"
+      },
+      icon: <Languages className="w-6 h-6" />,
+      type: "detection",
+      nativeRatio: 80
     },
     {
-      title: "AI Assesses Current Level",
-      description: "The AI quickly reviews Maria's progress and adapts the lesson to her current proficiency level.",
-      content: "Let's start with a quick review. Can you tell me what you did yesterday? Use past tense.",
-      userResponse: "Yesterday I go to market with my mother",
-      aiResponse: "Good try! Let's practice: 'Yesterday I WENT to the market.' Can you repeat that?",
+      title: "Basic Greetings (Native + English)",
+      description: "AI teaches basic greetings using 70% native language for explanations, 30% English practice.",
+      content: {
+        swahili: "Vizuri! Sasa jifunze maneno ya salamu. 'Good morning' ni 'Habari za asubuhi'. Rudia: Good morning",
+        english: "Good! Now learn greeting words. 'Good morning' means 'Habari za asubuhi'. Repeat: Good morning"
+      },
+      userResponse: {
+        swahili: "Good... morning?",
+        english: "Good... morning?"
+      },
+      aiResponse: {
+        swahili: "Vizuri sana! Perfect! Sasa jaribu kusema 'How are you?' - ni 'Hujambo?'",
+        english: "Very good! Perfect! Now try to say 'How are you?' - it's 'Hujambo?'"
+      },
       icon: <MessageCircle className="w-6 h-6" />,
-      type: "assessment"
+      type: "greetings",
+      nativeRatio: 70
     },
     {
-      title: "Interactive Vocabulary Practice",
-      description: "The AI teaches new vocabulary through context and repetition.",
-      content: "Perfect! Now let's learn new words. Listen: 'I bought vegetables at the market.' What does 'bought' mean?",
-      userResponse: "Bought means... to get something with money?",
-      aiResponse: "Excellent! 'Bought' is the past tense of 'buy'. Let's practice: 'I bought bread yesterday.'",
+      title: "Simple Vocabulary (Balanced Mix)",
+      description: "Building vocabulary with 50% native explanations, 50% English practice and encouragement.",
+      content: {
+        swahili: "Let's learn family words. 'Mother' ni 'Mama', 'Father' ni 'Baba'. Can you say 'My mother'?",
+        english: "Let's learn family words. 'Mother' is 'Mama', 'Father' is 'Baba'. Can you say 'My mother'?"
+      },
+      userResponse: {
+        swahili: "My... mother... mama wangu?",
+        english: "My... mother... mama wangu?"
+      },
+      aiResponse: {
+        swahili: "Excellent! Yes, 'My mother' ni 'mama wangu'. You're learning fast! Now try 'My father'",
+        english: "Excellent! Yes, 'My mother' is 'mama wangu'. You're learning fast! Now try 'My father'"
+      },
       icon: <Volume2 className="w-6 h-6" />,
-      type: "vocabulary"
+      type: "vocabulary",
+      nativeRatio: 50
     },
     {
-      title: "Story-Based Learning",
-      description: "The AI presents an engaging story to practice comprehension and speaking.",
-      content: "Great! Now listen to this short story: 'Sarah went to the market. She bought apples and oranges...'",
-      userResponse: "Sarah bought fruits at the market",
-      aiResponse: "Perfect comprehension! Now tell me, what would you buy if you went to the market?",
+      title: "Simple Conversations (More English)",
+      description: "Practicing conversations with 30% native support, 70% English to build confidence.",
+      content: {
+        swahili: "Great progress! Now let's practice. I'll ask: 'What is your name?' Jibu kwa Kiingereza: 'My name is...'",
+        english: "Great progress! Now let's practice. I'll ask: 'What is your name?' Answer in English: 'My name is...'"
+      },
+      userResponse: {
+        swahili: "My name is Maria",
+        english: "My name is Maria"
+      },
+      aiResponse: {
+        swahili: "Perfect English! Very good pronunciation! Can you tell me about your family in English?",
+        english: "Perfect English! Very good pronunciation! Can you tell me about your family in English?"
+      },
       icon: <Award className="w-6 h-6" />,
-      type: "story"
+      type: "conversation",
+      nativeRatio: 30
     },
     {
-      title: "Progress Tracking & Encouragement",
-      description: "The AI provides feedback and tracks learning progress for teachers and education ministries.",
-      content: "Wonderful work today, Maria! You completed 85% of today's lesson. See you tomorrow!",
-      userResponse: "Thank you! Goodbye!",
-      aiResponse: "Goodbye Maria! Keep practicing. Your English is improving every day!",
+      title: "Full English Immersion",
+      description: "Advanced practice with 90% English, minimal native language support for complex concepts.",
+      content: {
+        swahili: "Wonderful! You're ready for English conversation. Tell me about your daily activities using English words we learned.",
+        english: "Wonderful! You're ready for English conversation. Tell me about your daily activities using English words we learned."
+      },
+      userResponse: {
+        swahili: "I wake up in the morning. I greet my mother and father. I go to school.",
+        english: "I wake up in the morning. I greet my mother and father. I go to school."
+      },
+      aiResponse: {
+        swahili: "Outstanding! Your English is improving remarkably! Tomorrow we'll learn more advanced topics. Keep practicing!",
+        english: "Outstanding! Your English is improving remarkably! Tomorrow we'll learn more advanced topics. Keep practicing!"
+      },
       icon: <Award className="w-6 h-6" />,
-      type: "completion"
+      type: "immersion",
+      nativeRatio: 10
     }
+  ];
+
+  const languageOptions = [
+    { code: 'swahili', name: 'Swahili (Kenya/Tanzania)', flag: '🇰🇪' },
+    { code: 'kinyarwanda', name: 'Kinyarwanda (Rwanda)', flag: '🇷🇼' }
   ];
 
   useEffect(() => {
@@ -125,31 +182,52 @@ const Demo = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Interactive Demo: AI-Powered Voice Learning
+            Interactive Demo: Multilingual AI-Powered Learning
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Experience how Maria, a student in rural Kenya, learns English through our voice-based AI platform 
-            using just her feature phone - no internet required.
+            Experience how Maria, a student in rural Kenya, learns English starting from her native Swahili 
+            through our adaptive voice-based AI platform - no internet required.
           </p>
 
+          {/* Language Selection */}
+          <div className="flex justify-center space-x-4 mb-8">
+            {languageOptions.map((lang) => (
+              <Button
+                key={lang.code}
+                variant={selectedLanguage === lang.code ? "default" : "outline"}
+                onClick={() => setSelectedLanguage(lang.code as 'swahili' | 'kinyarwanda')}
+                className="flex items-center space-x-2"
+              >
+                <span>{lang.flag}</span>
+                <span>{lang.name}</span>
+              </Button>
+            ))}
+          </div>
+
           {/* Demo Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
               <div className="flex items-center justify-center space-x-2">
-                <Zap className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-blue-800">4 sec response</span>
+                <Languages className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-blue-800">Multilingual AI</span>
               </div>
             </div>
             <div className="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg">
               <div className="flex items-center justify-center space-x-2">
-                <Users className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-green-800">2.7B potential users</span>
+                <Zap className="w-5 h-5 text-green-600" />
+                <span className="text-sm font-medium text-green-800">Adaptive Learning</span>
               </div>
             </div>
             <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
               <div className="flex items-center justify-center space-x-2">
-                <Globe className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-purple-800">No internet needed</span>
+                <Users className="w-5 h-5 text-purple-600" />
+                <span className="text-sm font-medium text-purple-800">Beginner Friendly</span>
+              </div>
+            </div>
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg">
+              <div className="flex items-center justify-center space-x-2">
+                <Globe className="w-5 h-5 text-orange-600" />
+                <span className="text-sm font-medium text-orange-800">No Internet Needed</span>
               </div>
             </div>
           </div>
@@ -181,9 +259,9 @@ const Demo = () => {
                   <div className="flex items-center space-x-2">
                     <Phone className="w-6 h-6" />
                     <div>
-                      <CardTitle>Bakame AI Voice Learning</CardTitle>
+                      <CardTitle>Bakame AI Multilingual Learning</CardTitle>
                       <CardDescription className="text-blue-100">
-                        Interactive Learning Session
+                        {selectedLanguage === 'swahili' ? 'Swahili to English' : 'Kinyarwanda to English'} Learning Session
                       </CardDescription>
                     </div>
                   </div>
@@ -196,27 +274,35 @@ const Demo = () => {
               <CardContent className="p-6">
                 {!isPlaying && currentStep === 0 ? (
                   <div className="text-center py-12">
-                    <Phone className="w-24 h-24 text-gray-300 mx-auto mb-6" />
+                    <Languages className="w-24 h-24 text-gray-300 mx-auto mb-6" />
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                      Ready to Start the Demo?
+                      Ready to Experience Multilingual Learning?
                     </h3>
                     <p className="text-gray-600 mb-6">
-                      Click the button below to simulate Maria's English learning session
+                      Click below to simulate Maria's journey from {selectedLanguage === 'swahili' ? 'Swahili' : 'Kinyarwanda'} to English fluency
                     </p>
                     <Button onClick={startDemo} size="lg" className="bg-gradient-to-r from-blue-600 to-green-600">
                       <Play className="w-5 h-5 mr-2" />
-                      Start Voice Learning Demo
+                      Start Multilingual Learning Demo
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    {/* Progress Bar */}
+                    {/* Progress Bar with Language Transition */}
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700">Lesson Progress</span>
-                        <span className="text-sm text-gray-500">{Math.round(progress)}%</span>
+                        <span className="text-sm font-medium text-gray-700">Learning Progress</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm text-gray-500">{Math.round(progress)}%</span>
+                          <Badge variant="outline">
+                            {currentStepData?.nativeRatio}% Native / {100 - (currentStepData?.nativeRatio || 0)}% English
+                          </Badge>
+                        </div>
                       </div>
                       <Progress value={progress} className="w-full" />
+                      <div className="mt-2 text-xs text-gray-500 text-center">
+                        Language Transition: Gradually increasing English usage
+                      </div>
                     </div>
 
                     {/* Current Step */}
@@ -231,6 +317,9 @@ const Demo = () => {
                               {currentStepData.title}
                             </h3>
                             <Badge variant="secondary">{currentStepData.type}</Badge>
+                            <Badge variant="outline" className="bg-green-50">
+                              {currentStepData.nativeRatio}% Native Support
+                            </Badge>
                           </div>
                           <p className="text-gray-600">{currentStepData.description}</p>
                         </div>
@@ -240,9 +329,9 @@ const Demo = () => {
                       {showConversation && (
                         <ConversationFlow
                           isActive={isPlaying}
-                          currentMessage={currentStepData.content}
-                          userResponse={currentStepData.userResponse}
-                          aiResponse={currentStepData.aiResponse}
+                          currentMessage={currentStepData.content[selectedLanguage]}
+                          userResponse={currentStepData.userResponse[selectedLanguage]}
+                          aiResponse={currentStepData.aiResponse[selectedLanguage]}
                           stepType={currentStepData.type}
                         />
                       )}
@@ -278,12 +367,12 @@ const Demo = () => {
 
           {/* Analytics Panel */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Real-Time Analytics */}
+            {/* Language Learning Analytics */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Live Analytics</CardTitle>
+                <CardTitle className="text-lg">Learning Analytics</CardTitle>
                 <CardDescription>
-                  Real-time data for educators
+                  Real-time multilingual progress
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -292,49 +381,49 @@ const Demo = () => {
                   <span className="text-sm font-medium">{formatTime(callDuration)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Words Learned:</span>
-                  <span className="text-sm font-medium">{Math.min(currentStep * 3 + 2, 15)}</span>
+                  <span className="text-sm text-gray-600">English Words:</span>
+                  <span className="text-sm font-medium">{Math.min(currentStep * 4 + 3, 20)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Comprehension:</span>
                   <span className="text-sm font-medium text-green-600">
-                    {Math.min(75 + currentStep * 5, 95)}%
+                    {Math.min(70 + currentStep * 6, 95)}%
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Engagement:</span>
-                  <span className="text-sm font-medium text-blue-600">High</span>
+                  <span className="text-sm text-gray-600">Native Support:</span>
+                  <span className="text-sm font-medium text-blue-600">
+                    {currentStepData?.nativeRatio || 0}%
+                  </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
                     className="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all duration-1000"
-                    style={{ width: `${Math.min(75 + currentStep * 5, 95)}%` }}
+                    style={{ width: `${Math.min(70 + currentStep * 6, 95)}%` }}
                   ></div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Technical Performance */}
+            {/* Language Transition Progress */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">System Performance</CardTitle>
+                <CardTitle className="text-lg">Language Transition</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Response Time:</span>
-                  <span className="text-green-600 font-medium">2.1s</span>
+                  <span className="text-gray-600">Native Language:</span>
+                  <span className="text-blue-600 font-medium">{currentStepData?.nativeRatio || 0}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Audio Quality:</span>
-                  <span className="text-green-600 font-medium">Excellent</span>
+                  <span className="text-gray-600">English Usage:</span>
+                  <span className="text-green-600 font-medium">{100 - (currentStepData?.nativeRatio || 0)}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Connection:</span>
-                  <span className="text-green-600 font-medium">Stable</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">AI Processing:</span>
-                  <span className="text-blue-600 font-medium">98% Accuracy</span>
+                  <span className="text-gray-600">Learning Stage:</span>
+                  <span className="text-purple-600 font-medium">
+                    {currentStep < 2 ? 'Beginner' : currentStep < 4 ? 'Intermediate' : 'Advanced'}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -342,16 +431,16 @@ const Demo = () => {
             {/* Key Features */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Demo Highlights</CardTitle>
+                <CardTitle className="text-lg">Multilingual Features</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {[
-                  "No internet required",
-                  "Works on any phone",
-                  "AI adapts to skill level",
-                  "Real-time progress tracking",
-                  "Personalized feedback",
-                  "24/7 availability"
+                  "Native language detection",
+                  "Gradual English transition",
+                  "Cultural context awareness",
+                  "Pronunciation coaching",
+                  "Real-time adaptation",
+                  "Progress optimization"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -367,12 +456,12 @@ const Demo = () => {
         <div className="mt-12 text-center">
           <div className="bg-blue-50 rounded-lg p-6 max-w-4xl mx-auto">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              This demo simulates a real voice interaction
+              Multilingual AI Learning Experience
             </h3>
             <p className="text-gray-600">
-              In the actual implementation, Maria would speak directly with our AI through her phone. 
-              The conversation flows naturally with speech recognition, AI processing, and text-to-speech 
-              responses - all optimized for low-bandwidth networks.
+              This demo shows how students can start learning in their native language (Swahili/Kinyarwanda) 
+              and gradually transition to English fluency. Our AI adapts to each learner's pace and provides 
+              culturally relevant examples while building confidence through progressive language immersion.
             </p>
           </div>
         </div>

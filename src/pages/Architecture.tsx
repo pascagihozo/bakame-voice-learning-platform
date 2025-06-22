@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Phone, Brain, Database, BarChart3, Shield, Zap, Globe, Users, Server, Cloud, Lock } from "lucide-react";
+import SystemFlowDiagram from "@/components/SystemFlowDiagram";
 
 const Architecture = () => {
   return (
@@ -14,14 +15,19 @@ const Architecture = () => {
             Technical Architecture
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A comprehensive overview of how Bakame AI delivers voice-based learning 
+            A comprehensive overview of how Bakame AI delivers multilingual voice-based learning 
             at scale across low-bandwidth networks in the Global South.
           </p>
         </div>
 
+        {/* System Flow Diagram */}
+        <section className="mb-16">
+          <SystemFlowDiagram />
+        </section>
+
         {/* System Overview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">System Flow</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Multilingual Learning Flow</h2>
           <Card className="border-0 shadow-lg">
             <CardContent className="p-8">
               <div className="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0 lg:space-x-6">
@@ -29,8 +35,8 @@ const Architecture = () => {
                   <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="font-semibold mb-2">Feature Phone</h3>
-                  <p className="text-sm text-gray-600">Student calls toll-free number</p>
+                  <h3 className="font-semibold mb-2">Student Calls</h3>
+                  <p className="text-sm text-gray-600">Speaks native language (Swahili/Kinyarwanda)</p>
                 </div>
                 
                 <div className="text-2xl text-gray-400">→</div>
@@ -39,28 +45,28 @@ const Architecture = () => {
                   <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Globe className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="font-semibold mb-2">Local Network</h3>
-                  <p className="text-sm text-gray-600">Existing phone infrastructure</p>
+                  <h3 className="font-semibold mb-2">Language Detection</h3>
+                  <p className="text-sm text-gray-600">AI identifies and adapts to native language</p>
                 </div>
                 
                 <div className="text-2xl text-gray-400">→</div>
                 
                 <div className="text-center">
                   <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Server className="w-8 h-8 text-purple-600" />
+                    <Brain className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h3 className="font-semibold mb-2">IVR Gateway</h3>
-                  <p className="text-sm text-gray-600">Call routing & processing</p>
+                  <h3 className="font-semibold mb-2">Smart Assessment</h3>
+                  <p className="text-sm text-gray-600">Evaluates English level & creates plan</p>
                 </div>
                 
                 <div className="text-2xl text-gray-400">→</div>
                 
                 <div className="text-center">
                   <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Brain className="w-8 h-8 text-orange-600" />
+                    <Zap className="w-8 h-8 text-orange-600" />
                   </div>
-                  <h3 className="font-semibold mb-2">Bakame AI Platform</h3>
-                  <p className="text-sm text-gray-600">AI processing & learning</p>
+                  <h3 className="font-semibold mb-2">Adaptive Teaching</h3>
+                  <p className="text-sm text-gray-600">Gradual transition to English usage</p>
                 </div>
                 
                 <div className="text-2xl text-gray-400">→</div>
@@ -69,8 +75,8 @@ const Architecture = () => {
                   <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                     <BarChart3 className="w-8 h-8 text-red-600" />
                   </div>
-                  <h3 className="font-semibold mb-2">Client Dashboard</h3>
-                  <p className="text-sm text-gray-600">Analytics & reporting</p>
+                  <h3 className="font-semibold mb-2">Progress Tracking</h3>
+                  <p className="text-sm text-gray-600">Real-time analytics & reporting</p>
                 </div>
               </div>
             </CardContent>
@@ -78,13 +84,74 @@ const Architecture = () => {
         </section>
 
         {/* Detailed Components */}
-        <Tabs defaultValue="voice" className="mb-16">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="multilingual" className="mb-16">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="multilingual">Multilingual AI</TabsTrigger>
             <TabsTrigger value="voice">Voice Interface</TabsTrigger>
             <TabsTrigger value="ai">AI Engine</TabsTrigger>
             <TabsTrigger value="content">Content System</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="multilingual" className="mt-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Globe className="w-5 h-5 text-green-600" />
+                    <span>Native Language Support</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Intelligent language detection and adaptive learning progression
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Primary Languages:</span>
+                      <Badge variant="secondary">Swahili, Kinyarwanda</Badge>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Detection Method:</span>
+                      <Badge variant="secondary">AI-powered analysis</Badge>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">Adaptation Speed:</span>
+                      <Badge variant="outline">Real-time</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Brain className="w-5 h-5 text-purple-600" />
+                    <span>Progressive Learning</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Gradual transition from native language to English immersion
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span className="text-sm">Start: 80% native, 20% English</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span className="text-sm">Middle: 50% native, 50% English</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span className="text-sm">Advanced: 20% native, 80% English</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
 
           <TabsContent value="voice" className="mt-8">
             <div className="grid md:grid-cols-2 gap-6">
@@ -152,29 +219,29 @@ const Architecture = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Brain className="w-5 h-5 text-purple-600" />
-                    <span>Speech Processing</span>
+                    <span>Multilingual Speech Processing</span>
                   </CardTitle>
                   <CardDescription>
-                    OpenAI Whisper optimized for accented English
+                    Advanced AI for cross-language learning optimization
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Speech Recognition:</span>
-                      <Badge variant="secondary">OpenAI Whisper</Badge>
+                      <Badge variant="secondary">Whisper Multilingual</Badge>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Language Model:</span>
-                      <Badge variant="secondary">GPT-4 Turbo</Badge>
+                      <Badge variant="secondary">GPT-4 Multilingual</Badge>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Text-to-Speech:</span>
-                      <Badge variant="secondary">ElevenLabs</Badge>
+                      <Badge variant="secondary">ElevenLabs Native</Badge>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Response Time:</span>
-                      <Badge variant="outline">&lt;4 seconds</Badge>
+                      <Badge variant="outline">&lt;3 seconds</Badge>
                     </div>
                   </div>
                 </CardContent>
@@ -184,25 +251,25 @@ const Architecture = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Zap className="w-5 h-5 text-yellow-600" />
-                    <span>AI Capabilities</span>
+                    <span>Smart Learning Engine</span>
                   </CardTitle>
                   <CardDescription>
-                    Advanced learning personalization and adaptation
+                    Adaptive curriculum based on native language patterns
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span className="text-sm">Custom prompts for A1-A2 CEFR levels</span>
+                      <span className="text-sm">Language transfer analysis</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span className="text-sm">Conversation state management</span>
+                      <span className="text-sm">Cultural context integration</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span className="text-sm">Adaptive difficulty adjustment</span>
+                      <span className="text-sm">Pronunciation coaching</span>
                     </div>
                   </div>
                 </CardContent>

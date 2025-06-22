@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { MessageCircle, Volume2, Mic, Brain } from "lucide-react";
+import { MessageCircle, Volume2, Mic, Brain, Languages } from "lucide-react";
 
 interface ConversationFlowProps {
   isActive: boolean;
@@ -24,11 +24,11 @@ const ConversationFlow = ({
     if (!isActive) return;
 
     const phases = [
-      { phase: 'ai-speaking', duration: 2000 },
-      { phase: 'user-thinking', duration: 1000 },
-      { phase: 'user-speaking', duration: 1500 },
+      { phase: 'ai-speaking', duration: 3000 },
+      { phase: 'user-thinking', duration: 1500 },
+      { phase: 'user-speaking', duration: 2000 },
       { phase: 'ai-processing', duration: 1000 },
-      { phase: 'ai-responding', duration: 2000 }
+      { phase: 'ai-responding', duration: 2500 }
     ];
 
     let currentPhaseIndex = 0;
@@ -57,7 +57,7 @@ const ConversationFlow = ({
         } else {
           clearInterval(timer);
         }
-      }, 50);
+      }, 40);
       return () => clearInterval(timer);
     }
   }, [animationPhase, currentMessage]);
@@ -71,7 +71,7 @@ const ConversationFlow = ({
       case 'user-speaking':
         return <Mic className="w-5 h-5 text-green-500 animate-bounce" />;
       case 'ai-processing':
-        return <Brain className="w-5 h-5 text-purple-500 animate-spin" />;
+        return <Languages className="w-5 h-5 text-purple-500 animate-spin" />;
       case 'ai-responding':
         return <Volume2 className="w-5 h-5 text-blue-500 animate-pulse" />;
     }
@@ -80,16 +80,20 @@ const ConversationFlow = ({
   const getPhaseDescription = () => {
     switch (animationPhase) {
       case 'ai-speaking':
-        return "AI Tutor is speaking...";
+        return "AI Tutor teaching in multilingual mode...";
       case 'user-thinking':
-        return "Maria is thinking...";
+        return "Maria is processing the lesson...";
       case 'user-speaking':
-        return "Maria is responding...";
+        return "Maria is practicing English...";
       case 'ai-processing':
-        return "AI is processing response...";
+        return "AI analyzing language progress...";
       case 'ai-responding':
-        return "AI is providing feedback...";
+        return "AI providing personalized feedback...";
     }
+  };
+
+  const isNativeLanguage = (text: string) => {
+    return text.includes('Karibu') || text.includes('Habari') || text.includes('Vizuri') || text.includes('ni ');
   };
 
   if (!isActive) return null;
@@ -97,7 +101,7 @@ const ConversationFlow = ({
   return (
     <div className="space-y-4">
       {/* Current Phase Indicator */}
-      <div className="flex items-center justify-center space-x-2 p-3 bg-gray-50 rounded-lg">
+      <div className="flex items-center justify-center space-x-2 p-3 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg">
         {getPhaseIcon()}
         <span className="text-sm font-medium text-gray-700">
           {getPhaseDescription()}
@@ -109,14 +113,17 @@ const ConversationFlow = ({
         {/* AI Message */}
         {animationPhase === 'ai-speaking' && (
           <div className="flex justify-start">
-            <div className="max-w-xs bg-blue-100 rounded-lg p-3 relative">
-              <div className="flex items-center space-x-2 mb-1">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-xs font-medium text-blue-700">AI Tutor</span>
+            <div className="max-w-sm bg-gradient-to-r from-blue-100 to-green-100 rounded-lg p-4 relative">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-medium text-blue-700">AI Tutor (Multilingual)</span>
+                {isNativeLanguage(typingText) && (
+                  <span className="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Swahili</span>
+                )}
               </div>
-              <p className="text-sm text-gray-800">
+              <p className="text-sm text-gray-800 leading-relaxed">
                 {typingText}
-                <span className="animate-ping">|</span>
+                <span className="animate-ping text-blue-500">|</span>
               </p>
             </div>
           </div>
@@ -125,12 +132,12 @@ const ConversationFlow = ({
         {/* User Response */}
         {(animationPhase === 'user-speaking' || animationPhase === 'ai-processing' || animationPhase === 'ai-responding') && userResponse && (
           <div className="flex justify-end">
-            <div className="max-w-xs bg-green-100 rounded-lg p-3">
-              <div className="flex items-center space-x-2 mb-1 justify-end">
-                <span className="text-xs font-medium text-green-700">Maria</span>
+            <div className="max-w-sm bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg p-4">
+              <div className="flex items-center space-x-2 mb-2 justify-end">
+                <span className="text-xs font-medium text-green-700">Maria (Learning)</span>
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
               </div>
-              <p className="text-sm text-gray-800 text-right">{userResponse}</p>
+              <p className="text-sm text-gray-800 text-right leading-relaxed">{userResponse}</p>
             </div>
           </div>
         )}
@@ -138,12 +145,12 @@ const ConversationFlow = ({
         {/* AI Response/Feedback */}
         {animationPhase === 'ai-responding' && aiResponse && (
           <div className="flex justify-start">
-            <div className="max-w-xs bg-purple-100 rounded-lg p-3">
-              <div className="flex items-center space-x-2 mb-1">
+            <div className="max-w-sm bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-4">
+              <div className="flex items-center space-x-2 mb-2">
                 <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-medium text-purple-700">AI Feedback</span>
+                <span className="text-xs font-medium text-purple-700">AI Feedback & Encouragement</span>
               </div>
-              <p className="text-sm text-gray-800">{aiResponse}</p>
+              <p className="text-sm text-gray-800 leading-relaxed">{aiResponse}</p>
             </div>
           </div>
         )}
@@ -152,14 +159,17 @@ const ConversationFlow = ({
       {/* Processing Animation */}
       {animationPhase === 'ai-processing' && (
         <div className="flex justify-center">
-          <div className="flex space-x-1">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              />
-            ))}
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <div className="flex space-x-1">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                />
+              ))}
+            </div>
+            <span>Analyzing language patterns...</span>
           </div>
         </div>
       )}

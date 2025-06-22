@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -148,7 +147,7 @@ const Demo = () => {
     if (currentStep < demoSteps.length - 1) {
       setCurrentStep(currentStep + 1);
       setProgress(((currentStep + 1) / demoSteps.length) * 100);
-      setUserResponses([...userResponses, demoSteps[currentStep].userResponse]);
+      setUserResponses([...userResponses, demoSteps[currentStep].userResponse[selectedLanguage]]);
     } else {
       setIsPlaying(false);
       setShowConversation(false);

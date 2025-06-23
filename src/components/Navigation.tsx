@@ -12,24 +12,24 @@ const Navigation = () => {
 
   return (
     <nav className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        <div className="flex justify-between h-14 sm:h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-                <Phone className="w-5 h-5 text-white" />
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
+                <Phone className="w-3 h-3 sm:w-5 sm:h-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                 Bakame AI
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             <Link
               to="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive("/")
                   ? "text-blue-600 bg-blue-50"
                   : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -39,7 +39,7 @@ const Navigation = () => {
             </Link>
             <Link
               to="/demo"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive("/demo")
                   ? "text-blue-600 bg-blue-50"
                   : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -49,7 +49,7 @@ const Navigation = () => {
             </Link>
             <Link
               to="/architecture"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive("/architecture")
                   ? "text-blue-600 bg-blue-50"
                   : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -57,7 +57,7 @@ const Navigation = () => {
             >
               Architecture
             </Link>
-            <Button className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
+            <Button className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-sm px-3 lg:px-4">
               Contact Us
             </Button>
           </div>
@@ -68,6 +68,7 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
+              className="p-2"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -77,7 +78,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2 mx-2">
               <Link
                 to="/"
                 className={`block px-3 py-2 rounded-md text-base font-medium ${

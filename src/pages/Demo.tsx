@@ -331,33 +331,33 @@ const Demo = () => {
   const currentNativeRatio = currentStepData.nativeRatio[learningMode];
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-4 sm:py-8 px-2 sm:px-4 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        {/* Header - Mobile Responsive */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 px-2">
             Interactive Demo: Dynamic Multilingual AI Learning
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8 px-2">
             Experience how learners progress from their native language to English fluency with our adaptive AI tutor.
             Choose your language and learning style to see how our system adapts in real-time.
           </p>
 
-          {/* Language & Mode Selection */}
-          <div className="space-y-8 mb-8">
+          {/* Language & Mode Selection - Mobile Responsive */}
+          <div className="space-y-6 sm:space-y-8 mb-6 sm:mb-8">
             {/* Language Selection */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Select Your Native Language</h3>
-              <div className="flex justify-center space-x-4">
+            <div className="px-2">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Select Your Native Language</h3>
+              <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 max-w-md sm:max-w-none mx-auto">
                 {languageOptions.map((lang) => (
                   <Button
                     key={lang.code}
                     variant={selectedLanguage === lang.code ? "default" : "outline"}
                     onClick={() => setSelectedLanguage(lang.code as 'swahili' | 'kinyarwanda')}
-                    className="flex items-center space-x-2 px-6"
+                    className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 w-full sm:w-auto"
                   >
                     <span className="text-lg">{lang.flag}</span>
-                    <div className="text-left">
+                    <div className="text-center sm:text-left">
                       <div className="font-medium">{lang.name}</div>
                       <div className="text-xs opacity-75">{lang.region}</div>
                     </div>
@@ -366,27 +366,27 @@ const Demo = () => {
               </div>
             </div>
 
-            {/* Learning Mode Selection */}
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-lg font-semibold mb-4">Choose Learning Style</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {/* Learning Mode Selection - Mobile Responsive */}
+            <div className="max-w-6xl mx-auto px-2">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Choose Learning Style</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
                 {learningModeOptions.map((mode) => (
                   <Button
                     key={mode.value}
                     variant={learningMode === mode.value ? "default" : "outline"}
                     onClick={() => setLearningMode(mode.value as typeof learningMode)}
-                    className="flex flex-col items-center p-6 h-auto"
+                    className="flex flex-col items-center p-4 sm:p-6 h-auto text-center"
                   >
                     {mode.icon}
-                    <div className="mt-2 text-center">
-                      <div className="font-medium">{mode.label}</div>
+                    <div className="mt-2">
+                      <div className="font-medium text-sm sm:text-base">{mode.label}</div>
                     </div>
                   </Button>
                 ))}
               </div>
               
-              {/* Learning Mode Descriptions - Now moved below the cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+              {/* Learning Mode Descriptions - Mobile Responsive */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
                 <div className="text-center p-3 bg-gray-50 rounded-lg">
                   <p className="font-medium text-gray-800 mb-1">Gradual Transition</p>
                   <p>Start with native language, gradually increase English</p>
@@ -403,45 +403,46 @@ const Demo = () => {
             </div>
           </div>
 
-          {/* Demo Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
-              <div className="flex items-center justify-center space-x-2">
-                <Languages className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-blue-800">Native Detection</span>
+          {/* Demo Stats - Mobile Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 max-w-5xl mx-auto mb-6 sm:mb-8 px-2">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 rounded-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <Languages className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                <span className="text-xs sm:text-sm font-medium text-blue-800 text-center">Native Detection</span>
               </div>
             </div>
-            <div className="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg">
-              <div className="flex items-center justify-center space-x-2">
-                <Zap className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-green-800">Adaptive Learning</span>
+            <div className="bg-gradient-to-r from-green-50 to-green-100 p-3 sm:p-4 rounded-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                <span className="text-xs sm:text-sm font-medium text-green-800 text-center">Adaptive Learning</span>
               </div>
             </div>
-            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
-              <div className="flex items-center justify-center space-x-2">
-                <Users className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-purple-800">Cultural Context</span>
+            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-3 sm:p-4 rounded-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+                <span className="text-xs sm:text-sm font-medium text-purple-800 text-center">Cultural Context</span>
               </div>
             </div>
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg">
-              <div className="flex items-center justify-center space-x-2">
-                <Globe className="w-5 h-5 text-orange-600" />
-                <span className="text-sm font-medium text-orange-800">Offline Ready</span>
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-3 sm:p-4 rounded-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+                <span className="text-xs sm:text-sm font-medium text-orange-800 text-center">Offline Ready</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-8">
-          {/* Phone Animation */}
-          <div className="lg:col-span-1">
+        {/* Main Content - Responsive Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          {/* Phone Animation - Mobile Full Width */}
+          <div className="lg:col-span-1 order-2 lg:order-1">
             <Card className="border-0 shadow-xl">
-              <CardHeader className="text-center">
-                <CardTitle className="text-lg">Maria's Learning Journey</CardTitle>
-                <CardDescription>
+              <CardHeader className="text-center p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Maria's Learning Journey</CardTitle>
+                <CardDescription className="text-sm">
                   {selectedLanguage === 'swahili' ? 'Kiswahili' : 'Kinyarwanda'} → English
                 </CardDescription>
-                <div className="flex justify-center space-x-2 mt-2">
+                <div className="flex flex-wrap justify-center gap-2 mt-2">
                   <Badge variant={callQuality === 'excellent' ? 'default' : 'outline'} className="text-xs">
                     📶 {callQuality}
                   </Badge>
@@ -450,28 +451,28 @@ const Demo = () => {
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
                 <PhoneAnimation 
                   isActive={isPlaying}
                   currentStep={currentStep}
                   callDuration={callDuration}
                 />
                 
-                {/* Interactive Call Controls */}
+                {/* Interactive Call Controls - Mobile Responsive */}
                 {isPlaying && (
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
                     <Button
                       size="sm"
                       variant={isUserSpeaking ? "default" : "outline"}
                       onClick={toggleUserSpeaking}
-                      className="flex items-center space-x-1"
+                      className="flex items-center justify-center space-x-1 w-full sm:w-auto"
                     >
                       {isUserSpeaking ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}
                       <span className="text-xs">{isUserSpeaking ? 'Speaking' : 'Listen'}</span>
                     </Button>
                     
                     <Select value={callQuality} onValueChange={(value: any) => setCallQuality(value)}>
-                      <SelectTrigger className="w-20 h-8">
+                      <SelectTrigger className="w-full sm:w-24 h-8">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -486,56 +487,56 @@ const Demo = () => {
             </Card>
           </div>
 
-          {/* Main Demo Interface */}
-          <div className="lg:col-span-2">
+          {/* Main Demo Interface - Mobile Full Width */}
+          <div className="lg:col-span-2 order-1 lg:order-2">
             <Card className="border-0 shadow-xl">
-              <CardHeader className="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-t-lg">
-                <div className="flex items-center justify-between">
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-t-lg p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
                   <div className="flex items-center space-x-2">
-                    <Phone className="w-6 h-6" />
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                     <div>
-                      <CardTitle>Bakame AI Dynamic Learning</CardTitle>
-                      <CardDescription className="text-blue-100">
+                      <CardTitle className="text-base sm:text-lg">Bakame AI Dynamic Learning</CardTitle>
+                      <CardDescription className="text-blue-100 text-sm">
                         {selectedLanguage === 'swahili' ? 'Kiswahili' : 'Kinyarwanda'} → English • {learningModeOptions.find(m => m.value === learningMode)?.label}
                       </CardDescription>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left sm:text-right">
                     <div className="text-sm opacity-75">Session Time</div>
                     <div className="text-lg font-mono">{formatTime(callDuration)}</div>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 {!isPlaying && currentStep === 0 ? (
-                  <div className="text-center py-12">
-                    <Languages className="w-24 h-24 text-gray-300 mx-auto mb-6" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  <div className="text-center py-8 sm:py-12">
+                    <Languages className="w-16 h-16 sm:w-24 sm:h-24 text-gray-300 mx-auto mb-4 sm:mb-6" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">
                       Ready for Dynamic Learning?
                     </h3>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
                       Experience how Maria learns English from {selectedLanguage === 'swahili' ? 'Kiswahili' : 'Kinyarwanda'} 
                       using the {learningModeOptions.find(m => m.value === learningMode)?.label} approach
                     </p>
-                    <Button onClick={startDemo} size="lg" className="bg-gradient-to-r from-blue-600 to-green-600">
-                      <Play className="w-5 h-5 mr-2" />
+                    <Button onClick={startDemo} size="lg" className="bg-gradient-to-r from-blue-600 to-green-600 w-full sm:w-auto">
+                      <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       Start Dynamic Learning Demo
                     </Button>
                   </div>
                 ) : (
-                  <div className="space-y-6">
-                    {/* Progress Bar with Dynamic Language Ratio */}
+                  <div className="space-y-4 sm:space-y-6">
+                    {/* Progress Bar with Dynamic Language Ratio - Mobile Responsive */}
                     <div>
-                      <div className="flex justify-between mb-2">
+                      <div className="flex flex-col sm:flex-row justify-between mb-2 space-y-1 sm:space-y-0">
                         <span className="text-sm font-medium text-gray-700">Learning Progress</span>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                           <span className="text-sm text-gray-500">{Math.round(progress)}%</span>
-                          <Badge variant="outline">
+                          <Badge variant="outline" className="text-xs">
                             {currentNativeRatio}% Native / {100 - currentNativeRatio}% English
                           </Badge>
                         </div>
                       </div>
-                      <Progress value={progress} className="w-full h-3" />
+                      <Progress value={progress} className="w-full h-2 sm:h-3" />
                       <div className="mt-2 flex justify-between text-xs text-gray-500">
                         <span>{selectedLanguage === 'swahili' ? 'Kiswahili' : 'Kinyarwanda'} Heavy</span>
                         <span>Balanced Mix</span>
@@ -543,23 +544,25 @@ const Demo = () => {
                       </div>
                     </div>
 
-                    {/* Current Step with Dynamic Content */}
-                    <div className="bg-gray-50 rounded-lg p-6">
-                      <div className="flex items-start space-x-4 mb-4">
-                        <div className="bg-blue-100 p-3 rounded-full">
+                    {/* Current Step with Dynamic Content - Mobile Responsive */}
+                    <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
+                      <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 mb-4">
+                        <div className="bg-blue-100 p-2 sm:p-3 rounded-full mx-auto sm:mx-0">
                           {currentStepData.icon}
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-2">
-                            <h3 className="text-lg font-semibold text-gray-900">
+                        <div className="flex-1 text-center sm:text-left">
+                          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-2">
+                            <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                               {currentStepData.title}
                             </h3>
-                            <Badge variant="secondary">{currentStepData.type}</Badge>
-                            <Badge variant="outline" className="bg-green-50">
-                              {currentNativeRatio}% Native Support
-                            </Badge>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-1">
+                              <Badge variant="secondary" className="text-xs">{currentStepData.type}</Badge>
+                              <Badge variant="outline" className="bg-green-50 text-xs">
+                                {currentNativeRatio}% Native Support
+                              </Badge>
+                            </div>
                           </div>
-                          <p className="text-gray-600">{currentStepData.description}</p>
+                          <p className="text-sm sm:text-base text-gray-600">{currentStepData.description}</p>
                         </div>
                       </div>
 
@@ -577,24 +580,24 @@ const Demo = () => {
                       )}
                     </div>
 
-                    {/* Controls */}
-                    <div className="flex justify-between items-center">
-                      <Button variant="outline" onClick={resetDemo}>
+                    {/* Controls - Mobile Responsive */}
+                    <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
+                      <Button variant="outline" onClick={resetDemo} className="w-full sm:w-auto">
                         <RotateCcw className="w-4 h-4 mr-2" />
                         Reset Demo
                       </Button>
                       
                       {isPlaying && currentStep < demoSteps.length - 1 ? (
-                        <Button onClick={nextStep} className="bg-gradient-to-r from-blue-600 to-green-600">
+                        <Button onClick={nextStep} className="bg-gradient-to-r from-blue-600 to-green-600 w-full sm:w-auto">
                           Continue Learning →
                         </Button>
                       ) : isPlaying && currentStep === demoSteps.length - 1 ? (
-                        <Button onClick={nextStep} className="bg-gradient-to-r from-green-600 to-blue-600">
+                        <Button onClick={nextStep} className="bg-gradient-to-r from-green-600 to-blue-600 w-full sm:w-auto">
                           Complete Lesson 🎉
                         </Button>
                       ) : (
-                        <Button onClick={startDemo} className="bg-gradient-to-r from-blue-600 to-green-600">
-                          <Play className="w-4 h-4 mr-2" />
+                        <Button onClick={startDemo} className="bg-gradient-to-r from-blue-600 to-green-600 w-full sm:w-auto">
+                          <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                           Start Demo
                         </Button>
                       )}
@@ -605,34 +608,34 @@ const Demo = () => {
             </Card>
           </div>
 
-          {/* Enhanced Analytics Panel */}
-          <div className="lg:col-span-1 space-y-6">
+          {/* Enhanced Analytics Panel - Mobile Full Width */}
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6 order-3">
             {/* Dynamic Learning Analytics */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Learning Analytics</CardTitle>
-                <CardDescription>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Learning Analytics</CardTitle>
+                <CardDescription className="text-sm">
                   Real-time adaptation metrics
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Session Duration:</span>
-                  <span className="text-sm font-medium">{formatTime(callDuration)}</span>
+              <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6 pt-0">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Session Duration:</span>
+                  <span className="font-medium">{formatTime(callDuration)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Words Learned:</span>
-                  <span className="text-sm font-medium">{Math.min(currentStep * 5 + 8, 35)}</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Words Learned:</span>
+                  <span className="font-medium">{Math.min(currentStep * 5 + 8, 35)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Comprehension:</span>
-                  <span className="text-sm font-medium text-green-600">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Comprehension:</span>
+                  <span className="font-medium text-green-600">
                     {Math.min(75 + currentStep * 5, 96)}%
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Confidence Level:</span>
-                  <span className="text-sm font-medium text-blue-600">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Confidence Level:</span>
+                  <span className="font-medium text-blue-600">
                     {Math.min(60 + currentStep * 8, 92)}%
                   </span>
                 </div>
@@ -647,11 +650,11 @@ const Demo = () => {
 
             {/* Dynamic Language Transition */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Language Balance</CardTitle>
-                <CardDescription>Current lesson composition</CardDescription>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Language Balance</CardTitle>
+                <CardDescription className="text-sm">Current lesson composition</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3 text-sm">
+              <CardContent className="space-y-3 text-sm p-4 sm:p-6 pt-0">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Native ({selectedLanguage === 'swahili' ? 'Kiswahili' : 'Kinyarwanda'}):</span>
                   <span className="text-blue-600 font-medium">{currentNativeRatio}%</span>
@@ -662,7 +665,7 @@ const Demo = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Learning Mode:</span>
-                  <span className="text-purple-600 font-medium">
+                  <span className="text-purple-600 font-medium text-xs">
                     {learningModeOptions.find(m => m.value === learningMode)?.label}
                   </span>
                 </div>
@@ -677,10 +680,10 @@ const Demo = () => {
 
             {/* Smart Features */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">AI Features Active</CardTitle>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">AI Features Active</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2 sm:space-y-3 p-4 sm:p-6 pt-0">
                 {[
                   { feature: "Native language detection", active: true },
                   { feature: "Cultural context awareness", active: true },
@@ -692,7 +695,7 @@ const Demo = () => {
                   <div key={index} className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <div className={`w-2 h-2 rounded-full ${item.active ? 'bg-green-500 animate-pulse' : 'bg-gray-300'}`}></div>
-                      <span className="text-sm">{item.feature}</span>
+                      <span className="text-xs sm:text-sm">{item.feature}</span>
                     </div>
                     <Badge variant={item.active ? "default" : "outline"} className="text-xs">
                       {item.active ? "ON" : "OFF"}
@@ -704,13 +707,13 @@ const Demo = () => {
           </div>
         </div>
 
-        {/* Enhanced Bottom Info */}
-        <div className="mt-12 space-y-6">
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 max-w-4xl mx-auto">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+        {/* Enhanced Bottom Info - Mobile Responsive */}
+        <div className="mt-8 sm:mt-12 space-y-4 sm:space-y-6">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4 sm:p-6 max-w-6xl mx-auto">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4 text-center">
               🌍 Dynamic Multilingual Learning Experience
             </h3>
-            <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-600">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-sm text-gray-600">
               <div>
                 <h4 className="font-semibold text-gray-800 mb-2">For Complete Beginners:</h4>
                 <p>
@@ -728,8 +731,8 @@ const Demo = () => {
             </div>
           </div>
           
-          <div className="text-center">
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+          <div className="text-center px-4">
+            <p className="text-xs sm:text-sm text-gray-500 max-w-2xl mx-auto">
               This interactive demo simulates real learning sessions where our AI tutor adapts to each student's 
               pace, cultural background, and preferred learning style - all while working offline on basic feature phones.
             </p>

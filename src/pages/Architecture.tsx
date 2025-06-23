@@ -1,40 +1,42 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Phone, Brain, Database, BarChart3, Shield, Zap, Globe, Users, Server, Cloud, Lock, Languages } from "lucide-react";
+import { Phone, Brain, Database, BarChart3, Shield, Zap, Globe, Users, Server, Cloud, Lock, Languages, ArrowRight, CheckCircle, Star } from "lucide-react";
 import InteractiveArchitectureDiagram from "@/components/InteractiveArchitectureDiagram";
 import { useState } from "react";
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const Architecture = () => {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  
   return (
     <div className="min-h-screen py-4 sm:py-6 lg:py-8 px-2 sm:px-4 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header - Mobile Responsive */}
+        {/* Enhanced Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 px-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4 px-2">
             Technical Architecture
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-2">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto px-2 leading-relaxed">
             A comprehensive overview of how Bakame AI delivers multilingual voice-based learning 
             at scale across low-bandwidth networks in the Global South.
           </p>
         </div>
 
-        {/* Simulation Modal Trigger - Mobile Responsive */}
-        <div className="flex justify-center mb-8 sm:mb-12 px-2">
+        {/* Enhanced Simulation Modal Trigger */}
+        <div className="flex justify-center mb-12 sm:mb-16 px-2">
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <button className="w-full sm:w-auto px-4 sm:px-6 py-3 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-lg font-semibold shadow hover:from-blue-700 hover:to-green-700 transition text-sm sm:text-base">
-                Simulate System Architecture
+              <button className="w-full sm:w-auto px-8 sm:px-10 py-4 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl font-bold shadow-lg hover:from-blue-700 hover:to-green-700 hover:shadow-xl transition-all duration-300 text-base sm:text-lg transform hover:scale-105">
+                🚀 Simulate System Architecture
               </button>
             </DialogTrigger>
             <DialogContent className="w-[95vw] sm:w-[90vw] lg:w-[1200px] xl:w-[1400px] 2xl:w-[1600px] max-w-[95vw] h-[70vh] sm:h-[80vh] lg:h-[650px] p-2 sm:p-4 bg-white border shadow-xl flex flex-col">
+              <DialogTitle className="text-sm sm:text-lg font-semibold text-gray-800">Interactive System Architecture</DialogTitle>
+              <DialogDescription className="text-xs sm:text-sm text-gray-600">Explore the complete system flow and architecture</DialogDescription>
               <div className="w-full flex flex-col items-center justify-center h-full">
                 <div className="w-full flex justify-between items-center px-2 sm:px-4 py-2 mb-2">
-                  <h3 className="text-sm sm:text-lg font-semibold text-gray-800">Interactive System Architecture</h3>
                   <button 
                     onClick={() => setExpanded(true)} 
                     className="px-2 sm:px-4 py-1 sm:py-2 bg-gray-200 hover:bg-gray-300 rounded text-xs sm:text-sm font-semibold shadow"
@@ -49,12 +51,13 @@ const Architecture = () => {
             </DialogContent>
           </Dialog>
           
-          {/* Expanded Modal - Full Screen Responsive */}
+          {/* Enhanced Expanded Modal */}
           <Dialog open={expanded} onOpenChange={setExpanded}>
             <DialogContent className="w-[98vw] h-[95vh] max-w-none max-h-none p-1 sm:p-2 bg-white border-none shadow-2xl flex flex-col items-center justify-center z-50">
+              <DialogTitle className="text-base sm:text-xl font-bold text-gray-800">Full System Architecture View</DialogTitle>
+              <DialogDescription className="text-sm text-gray-600">Complete interactive system visualization</DialogDescription>
               <div className="w-full flex flex-col items-center justify-center h-full">
                 <div className="w-full flex justify-between items-center px-2 sm:px-8 py-2 sm:py-4">
-                  <h3 className="text-base sm:text-xl font-bold text-gray-800">Full System Architecture View</h3>
                   <button 
                     onClick={() => setExpanded(false)} 
                     className="px-3 sm:px-4 py-1 sm:py-2 bg-gray-200 hover:bg-gray-300 rounded text-xs sm:text-sm font-semibold shadow"
@@ -70,30 +73,126 @@ const Architecture = () => {
           </Dialog>
         </div>
 
-        {/* System Overview - Mobile Grid */}
-        <section className="mb-12 sm:mb-16">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">Multilingual Learning Flow</h2>
-          <Card className="border-0 shadow-lg">
-            <CardContent className="p-4 sm:p-6 lg:p-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 items-center">
-                {[
-                  { icon: Phone, title: "Student Calls", desc: "Speaks native language (Swahili/Kinyarwanda)", color: "blue" },
-                  { icon: Globe, title: "Language Detection", desc: "AI identifies and adapts to native language", color: "green" },
-                  { icon: Brain, title: "Smart Assessment", desc: "Evaluates English level & creates plan", color: "purple" },
-                  { icon: Zap, title: "Adaptive Teaching", desc: "Gradual transition to English usage", color: "orange" },
-                  { icon: BarChart3, title: "Progress Tracking", desc: "Real-time analytics & reporting", color: "red" }
-                ].map((item, index) => (
-                  <div key={index} className="text-center">
-                    <div className={`bg-${item.color}-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3`}>
-                      <item.icon className={`w-6 h-6 sm:w-8 sm:h-8 text-${item.color}-600`} />
+        {/* Enhanced Multilingual Learning Flow */}
+        <section className="mb-16 sm:mb-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">
+            🌍 Multilingual Learning Flow
+          </h2>
+          <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-50 via-white to-green-50">
+            <CardContent className="p-6 sm:p-8 lg:p-12">
+              <div className="space-y-8">
+                {/* Main Flow Visualization */}
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-4 items-center">
+                  {[
+                    { 
+                      icon: Phone, 
+                      title: "Student Calls", 
+                      desc: "Speaks native language", 
+                      detail: "Swahili/Kinyarwanda", 
+                      color: "blue",
+                      accent: "🇷🇼"
+                    },
+                    { 
+                      icon: Globe, 
+                      title: "Language Detection", 
+                      desc: "AI identifies & adapts", 
+                      detail: "Real-time analysis", 
+                      color: "green",
+                      accent: "🧠"
+                    },
+                    { 
+                      icon: Brain, 
+                      title: "Smart Assessment", 
+                      desc: "Evaluates English level", 
+                      detail: "Creates learning plan", 
+                      color: "purple",
+                      accent: "📊"
+                    },
+                    { 
+                      icon: Zap, 
+                      title: "Adaptive Teaching", 
+                      desc: "Gradual transition", 
+                      detail: "Native → English", 
+                      color: "orange",
+                      accent: "🎯"
+                    },
+                    { 
+                      icon: BarChart3, 
+                      title: "Progress Tracking", 
+                      desc: "Real-time analytics", 
+                      detail: "Government reporting", 
+                      color: "red",
+                      accent: "📈"
+                    }
+                  ].map((item, index) => (
+                    <div key={index} className="text-center group">
+                      <div className={`bg-${item.color}-100 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
+                        <item.icon className={`w-8 h-8 sm:w-10 sm:h-10 text-${item.color}-600`} />
+                      </div>
+                      <div className="text-2xl mb-2">{item.accent}</div>
+                      <h3 className="font-bold mb-2 text-sm sm:text-base">{item.title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 mb-1">{item.desc}</p>
+                      <p className="text-xs text-gray-500 font-medium">{item.detail}</p>
+                      {index < 4 && (
+                        <div className="hidden lg:flex justify-center mt-4">
+                          <ArrowRight className="text-2xl text-gray-400 animate-pulse" />
+                        </div>
+                      )}
                     </div>
-                    <h3 className="font-semibold mb-2 text-sm sm:text-base">{item.title}</h3>
-                    <p className="text-xs sm:text-sm text-gray-600">{item.desc}</p>
-                    {index < 4 && (
-                      <div className="hidden lg:block text-2xl text-gray-400 mt-4">→</div>
-                    )}
+                  ))}
+                </div>
+
+                {/* Language Progression Visualization */}
+                <div className="bg-gradient-to-r from-blue-50 to-green-50 p-6 sm:p-8 rounded-xl border">
+                  <h3 className="text-lg sm:text-xl font-bold text-center mb-6 flex items-center justify-center gap-3">
+                    <Languages className="w-6 h-6" />
+                    Language Learning Progression
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { 
+                        level: "Beginner", 
+                        native: "80%", 
+                        english: "20%", 
+                        color: "blue",
+                        example: "Muraho! Let's learn 'Hello' in English"
+                      },
+                      { 
+                        level: "Intermediate", 
+                        native: "50%", 
+                        english: "50%", 
+                        color: "purple",
+                        example: "Now we mix: 'Good morning' ni 'Muraho'"
+                      },
+                      { 
+                        level: "Advanced", 
+                        native: "20%", 
+                        english: "80%", 
+                        color: "green",
+                        example: "Perfect! You can have full English conversations!"
+                      }
+                    ].map((stage, index) => (
+                      <div key={index} className={`bg-${stage.color}-50 p-6 rounded-xl border border-${stage.color}-200 shadow-md`}>
+                        <div className="text-center mb-4">
+                          <h4 className="font-bold text-base mb-2">{stage.level}</h4>
+                          <div className="flex justify-center gap-4 mb-3">
+                            <div className="text-sm">
+                              <div className="text-xs text-gray-600">Native</div>
+                              <div className="font-bold text-blue-600">{stage.native}</div>
+                            </div>
+                            <div className="text-sm">
+                              <div className="text-xs text-gray-600">English</div>
+                              <div className="font-bold text-green-600">{stage.english}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-white p-3 rounded-lg border text-xs italic text-gray-700">
+                          "{stage.example}"
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -514,22 +613,45 @@ const Architecture = () => {
 
         {/* Key Differentiators - Mobile Grid */}
         <section>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">Key Differentiators</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">
+            ⭐ Key Differentiators
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
-              { icon: Phone, title: "True Offline Capability", desc: "No internet required by end users, only voice calling", color: "blue" },
-              { icon: Brain, title: "AI-Powered Personalization", desc: "Adaptive learning without human instructors", color: "green" },
-              { icon: Shield, title: "Government-Ready", desc: "Built for scale with robust reporting and compliance", color: "purple" }
+              { 
+                icon: Phone, 
+                title: "True Offline Capability", 
+                desc: "No internet required by end users, only voice calling", 
+                color: "blue",
+                benefit: "Works in remote areas"
+              },
+              { 
+                icon: Brain, 
+                title: "AI-Powered Personalization", 
+                desc: "Adaptive learning without human instructors", 
+                color: "green",
+                benefit: "Scales infinitely"
+              },
+              { 
+                icon: Shield, 
+                title: "Government-Ready", 
+                desc: "Built for scale with robust reporting and compliance", 
+                color: "purple",
+                benefit: "Policy integration"
+              }
             ].map((item, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg">
-                <CardHeader className="p-4 sm:p-6">
-                  <div className={`bg-${item.color}-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4`}>
-                    <item.icon className={`w-6 h-6 sm:w-8 sm:h-8 text-${item.color}-600`} />
+              <Card key={index} className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+                <CardHeader className="p-6 sm:p-8">
+                  <div className={`bg-${item.color}-100 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
+                    <item.icon className={`w-8 h-8 sm:w-10 sm:h-10 text-${item.color}-600`} />
                   </div>
-                  <CardTitle className="text-base sm:text-lg">{item.title}</CardTitle>
-                  <CardDescription className="text-sm">
+                  <CardTitle className="text-lg sm:text-xl mb-3">{item.title}</CardTitle>
+                  <CardDescription className="text-sm mb-4">
                     {item.desc}
                   </CardDescription>
+                  <Badge variant="outline" className={`text-${item.color}-600 border-${item.color}-200`}>
+                    {item.benefit}
+                  </Badge>
                 </CardHeader>
               </Card>
             ))}

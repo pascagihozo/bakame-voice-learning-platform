@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Phone, Globe, Database, Cloud, Shield, Zap, Users, Server, Lock, Languages, Volume2, Mic, Headphones, Brain, BarChart3, MessageCircle } from 'lucide-react';
+import { Phone, Globe, Database, Cloud, Shield, Zap, Users, Server, Lock, Languages, Volume2, Mic, Headphones, Brain, BarChart3, MessageCircle, ArrowRight, CheckCircle } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -8,34 +7,39 @@ const SystemFlowDiagram = () => {
   return (
     <div className="space-y-12">
       {/* Enhanced Main Flow Diagram */}
-      <Card className="border-0 shadow-xl">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-xl sm:text-2xl text-center">Complete System Architecture & Data Flow</CardTitle>
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-50 to-green-50">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-2xl sm:text-3xl text-center bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+            Complete System Architecture & Data Flow
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-4 sm:p-6 lg:p-8">
-          <div className="space-y-12 lg:space-y-16">
+        <CardContent className="p-6 lg:p-8">
+          <div className="space-y-16 lg:space-y-20">
             {/* Layer 1: User Interface & Device Layer */}
             <div className="text-center">
-              <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-800">Layer 1: Device & Access Points</h3>
-              <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-8">
-                <div className="bg-blue-50 p-4 sm:p-6 rounded-lg border-2 border-blue-200 w-full max-w-xs">
-                  <Phone className="w-8 h-8 sm:w-12 sm:h-12 text-blue-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Feature Phone</div>
-                  <div className="text-xs text-gray-600 mb-2">Basic calling capability</div>
+              <h3 className="text-lg sm:text-xl font-bold mb-8 text-blue-800 flex items-center justify-center gap-3">
+                <Phone className="w-6 h-6" />
+                Layer 1: Device & Access Points
+              </h3>
+              <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-12">
+                <div className="bg-blue-50 p-6 sm:p-8 rounded-xl border-2 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300 w-full max-w-xs">
+                  <Phone className="w-12 h-12 sm:w-16 sm:h-16 text-blue-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-2">Feature Phone</div>
+                  <div className="text-sm text-gray-600 mb-3">Basic calling capability</div>
                   <Badge variant="outline" className="text-xs">No internet required</Badge>
                 </div>
-                <div className="text-xl lg:text-2xl text-gray-400 hidden lg:block">↔</div>
-                <div className="bg-green-50 p-4 sm:p-6 rounded-lg border-2 border-green-200 w-full max-w-xs">
-                  <Globe className="w-8 h-8 sm:w-12 sm:h-12 text-green-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Cellular Network</div>
-                  <div className="text-xs text-gray-600 mb-2">2G/3G/4G/5G</div>
+                <ArrowRight className="text-3xl lg:text-4xl text-blue-400 hidden lg:block animate-pulse" />
+                <div className="bg-green-50 p-6 sm:p-8 rounded-xl border-2 border-green-200 shadow-lg hover:shadow-xl transition-all duration-300 w-full max-w-xs">
+                  <Globe className="w-12 h-12 sm:w-16 sm:h-16 text-green-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-2">Cellular Network</div>
+                  <div className="text-sm text-gray-600 mb-3">2G/3G/4G/5G</div>
                   <Badge variant="outline" className="text-xs">Voice calls</Badge>
                 </div>
-                <div className="text-xl lg:text-2xl text-gray-400 hidden lg:block">→</div>
-                <div className="bg-purple-50 p-4 sm:p-6 rounded-lg border-2 border-purple-200 w-full max-w-xs">
-                  <Server className="w-8 h-8 sm:w-12 sm:h-12 text-purple-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Telecom Gateway</div>
-                  <div className="text-xs text-gray-600 mb-2">Call routing</div>
+                <ArrowRight className="text-3xl lg:text-4xl text-green-400 hidden lg:block animate-pulse" />
+                <div className="bg-purple-50 p-6 sm:p-8 rounded-xl border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all duration-300 w-full max-w-xs">
+                  <Server className="w-12 h-12 sm:w-16 sm:h-16 text-purple-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-2">Telecom Gateway</div>
+                  <div className="text-sm text-gray-600 mb-3">Call routing</div>
                   <Badge variant="outline" className="text-xs">SIP/VoIP</Badge>
                 </div>
               </div>
@@ -43,30 +47,33 @@ const SystemFlowDiagram = () => {
 
             {/* Layer 2: Communication & Processing Gateway */}
             <div className="text-center">
-              <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-green-800">Layer 2: Communication Gateway & Voice Processing</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                  <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">IVR System</div>
-                  <div className="text-xs text-gray-600 mb-2">Call routing & menu</div>
+              <h3 className="text-lg sm:text-xl font-bold mb-8 text-green-800 flex items-center justify-center gap-3">
+                <MessageCircle className="w-6 h-6" />
+                Layer 2: Communication Gateway & Voice Processing
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div className="bg-orange-50 p-6 rounded-xl border border-orange-200 shadow-md hover:shadow-lg transition-all duration-300">
+                  <MessageCircle className="w-8 h-8 sm:w-10 sm:h-10 text-orange-600 mx-auto mb-4" />
+                  <div className="text-sm font-bold mb-2">IVR System</div>
+                  <div className="text-xs text-gray-600 mb-3">Call routing & menu</div>
                   <Badge variant="secondary" className="text-xs">Twilio/Asterisk</Badge>
                 </div>
-                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                  <Mic className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Audio Capture</div>
-                  <div className="text-xs text-gray-600 mb-2">8kHz optimization</div>
+                <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200 shadow-md hover:shadow-lg transition-all duration-300">
+                  <Mic className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-600 mx-auto mb-4" />
+                  <div className="text-sm font-bold mb-2">Audio Capture</div>
+                  <div className="text-xs text-gray-600 mb-3">8kHz optimization</div>
                   <Badge variant="secondary" className="text-xs">Real-time</Badge>
                 </div>
-                <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
-                  <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Language Detection</div>
-                  <div className="text-xs text-gray-600 mb-2">Auto-detect native</div>
+                <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-200 shadow-md hover:shadow-lg transition-all duration-300">
+                  <Languages className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600 mx-auto mb-4" />
+                  <div className="text-sm font-bold mb-2">Language Detection</div>
+                  <div className="text-xs text-gray-600 mb-3">Auto-detect native</div>
                   <Badge variant="secondary" className="text-xs">ML-based</Badge>
                 </div>
-                <div className="bg-teal-50 p-4 rounded-lg border border-teal-200">
-                  <Headphones className="w-6 h-6 sm:w-8 sm:h-8 text-teal-600 mx-auto mb-3" />
-                  <div className="text-sm font-medium mb-1">Audio Output</div>
-                  <div className="text-xs text-gray-600 mb-2">Voice synthesis</div>
+                <div className="bg-teal-50 p-6 rounded-xl border border-teal-200 shadow-md hover:shadow-lg transition-all duration-300">
+                  <Headphones className="w-8 h-8 sm:w-10 sm:h-10 text-teal-600 mx-auto mb-4" />
+                  <div className="text-sm font-bold mb-2">Audio Output</div>
+                  <div className="text-xs text-gray-600 mb-3">Voice synthesis</div>
                   <Badge variant="secondary" className="text-xs">Multi-accent</Badge>
                 </div>
               </div>
@@ -74,60 +81,63 @@ const SystemFlowDiagram = () => {
 
             {/* Layer 3: Third-Party AI Services */}
             <div className="text-center">
-              <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-purple-800">Layer 3: AI Processing Engine (Third-Party APIs)</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 rounded-lg border border-blue-200">
-                  <Cloud className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 mx-auto mb-3" />
-                  <div className="text-sm font-bold mb-2">OpenAI Whisper API</div>
-                  <div className="text-xs text-gray-600 mb-3">Speech Recognition</div>
-                  <div className="space-y-2 text-xs">
-                    <div className="bg-white p-2 rounded border">
+              <h3 className="text-lg sm:text-xl font-bold mb-8 text-purple-800 flex items-center justify-center gap-3">
+                <Brain className="w-6 h-6" />
+                Layer 3: AI Processing Engine (Third-Party APIs)
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 sm:p-8 rounded-xl border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Cloud className="w-10 h-10 sm:w-12 sm:h-12 text-blue-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-3">OpenAI Whisper API</div>
+                  <div className="text-sm text-gray-600 mb-4">Speech Recognition</div>
+                  <div className="space-y-3 text-xs">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Input:</strong> Audio stream (8kHz)
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Process:</strong> Multi-language transcription
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Output:</strong> Text + language confidence
                     </div>
                   </div>
-                  <Badge variant="outline" className="mt-3 text-xs">API Key Required</Badge>
+                  <Badge variant="outline" className="mt-4 text-xs">API Key Required</Badge>
                 </div>
 
-                <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-4 sm:p-6 rounded-lg border border-green-200">
-                  <Brain className="w-8 h-8 sm:w-10 sm:h-10 text-green-600 mx-auto mb-3" />
-                  <div className="text-sm font-bold mb-2">OpenAI GPT-4 API</div>
-                  <div className="text-xs text-gray-600 mb-3">Language Processing & Learning</div>
-                  <div className="space-y-2 text-xs">
-                    <div className="bg-white p-2 rounded border">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 sm:p-8 rounded-xl border border-green-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Brain className="w-10 h-10 sm:w-12 sm:h-12 text-green-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-3">OpenAI GPT-4 API</div>
+                  <div className="text-sm text-gray-600 mb-4">Language Processing & Learning</div>
+                  <div className="space-y-3 text-xs">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Input:</strong> User text + context
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Process:</strong> Adaptive lesson generation
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Output:</strong> Personalized responses
                     </div>
                   </div>
-                  <Badge variant="outline" className="mt-3 text-xs">Custom Prompts</Badge>
+                  <Badge variant="outline" className="mt-4 text-xs">Custom Prompts</Badge>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-4 sm:p-6 rounded-lg border border-purple-200">
-                  <Volume2 className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600 mx-auto mb-3" />
-                  <div className="text-sm font-bold mb-2">ElevenLabs API</div>
-                  <div className="text-xs text-gray-600 mb-3">Text-to-Speech</div>
-                  <div className="space-y-2 text-xs">
-                    <div className="bg-white p-2 rounded border">
+                <div className="bg-gradient-to-br from-purple-50 to-pink-100 p-6 sm:p-8 rounded-xl border border-purple-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Volume2 className="w-10 h-10 sm:w-12 sm:h-12 text-purple-600 mx-auto mb-4" />
+                  <div className="text-base font-bold mb-3">ElevenLabs API</div>
+                  <div className="text-sm text-gray-600 mb-4">Text-to-Speech</div>
+                  <div className="space-y-3 text-xs">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Input:</strong> Text + voice preferences
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Process:</strong> Natural voice synthesis
                     </div>
-                    <div className="bg-white p-2 rounded border">
+                    <div className="bg-white p-3 rounded-lg border shadow-sm">
                       <strong>Output:</strong> Audio stream
                     </div>
                   </div>
-                  <Badge variant="outline" className="mt-3 text-xs">Native Accents</Badge>
+                  <Badge variant="outline" className="mt-4 text-xs">Native Accents</Badge>
                 </div>
               </div>
             </div>
@@ -224,106 +234,76 @@ const SystemFlowDiagram = () => {
         </CardContent>
       </Card>
 
-      {/* Interactive Data Flow Diagram */}
-      <Card className="border-0 shadow-xl">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg sm:text-xl">Real-time Data Flow & Component Interaction</CardTitle>
+      {/* Enhanced Interactive Data Flow Diagram */}
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-gray-50 to-blue-50">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-xl sm:text-2xl bg-gradient-to-r from-gray-700 to-blue-700 bg-clip-text text-transparent">
+            Real-time Data Flow & Component Interaction
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-4 sm:p-6">
-          <div className="space-y-8">
+        <CardContent className="p-6 lg:p-8">
+          <div className="space-y-10">
             {/* Step-by-step interaction flow */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border">
-                <div className="text-xl sm:text-2xl font-bold text-blue-600 mb-2">1</div>
-                <div className="text-sm font-medium mb-2">Call Initiated</div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div>• User dials number</div>
-                  <div>• IVR picks up</div>
-                  <div>• Session created</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {[
+                { num: 1, title: "Call Initiated", items: ["User dials number", "IVR picks up", "Session created"], color: "blue" },
+                { num: 2, title: "Audio Processing", items: ["Whisper API called", "Language detected", "Text extracted"], color: "green" },
+                { num: 3, title: "AI Processing", items: ["GPT-4 analyzes", "Context retrieved", "Response generated"], color: "purple" },
+                { num: 4, title: "Voice Synthesis", items: ["ElevenLabs TTS", "Native accent", "Audio generated"], color: "orange" },
+                { num: 5, title: "Learning Update", items: ["Progress saved", "Analytics updated", "Next lesson prep"], color: "red" }
+              ].map((step, index) => (
+                <div key={index} className={`text-center p-6 bg-gradient-to-br from-${step.color}-50 to-${step.color}-100 rounded-xl border shadow-lg hover:shadow-xl transition-all duration-300`}>
+                  <div className={`text-2xl sm:text-3xl font-bold text-${step.color}-600 mb-3 bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto shadow-md`}>{step.num}</div>
+                  <div className="text-sm font-bold mb-3">{step.title}</div>
+                  <div className="text-xs text-gray-600 space-y-2">
+                    {step.items.map((item, i) => (
+                      <div key={i} className="flex items-center justify-center gap-2">
+                        <CheckCircle className="w-3 h-3 text-green-500" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border">
-                <div className="text-xl sm:text-2xl font-bold text-green-600 mb-2">2</div>
-                <div className="text-sm font-medium mb-2">Audio Processing</div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div>• Whisper API called</div>
-                  <div>• Language detected</div>
-                  <div>• Text extracted</div>
-                </div>
-              </div>
-              <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border">
-                <div className="text-xl sm:text-2xl font-bold text-purple-600 mb-2">3</div>
-                <div className="text-sm font-medium mb-2">AI Processing</div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div>• GPT-4 analyzes</div>
-                  <div>• Context retrieved</div>
-                  <div>• Response generated</div>
-                </div>
-              </div>
-              <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border">
-                <div className="text-xl sm:text-2xl font-bold text-orange-600 mb-2">4</div>
-                <div className="text-sm font-medium mb-2">Voice Synthesis</div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div>• ElevenLabs TTS</div>
-                  <div>• Native accent</div>
-                  <div>• Audio generated</div>
-                </div>
-              </div>
-              <div className="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-lg border">
-                <div className="text-xl sm:text-2xl font-bold text-red-600 mb-2">5</div>
-                <div className="text-sm font-medium mb-2">Learning Update</div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div>• Progress saved</div>
-                  <div>• Analytics updated</div>
-                  <div>• Next lesson prep</div>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Resource Requirements */}
-            <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-4">System Resource Requirements & Third-Party Dependencies</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h5 className="font-semibold text-gray-800 text-sm sm:text-base">External APIs & Services</h5>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>OpenAI API</span>
-                      <Badge variant="secondary" className="text-xs w-fit">$0.01-0.03/1K tokens</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>ElevenLabs TTS</span>
-                      <Badge variant="secondary" className="text-xs w-fit">$0.30/1K chars</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>Twilio Voice</span>
-                      <Badge variant="secondary" className="text-xs w-fit">$0.013/min</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>AWS/GCP Hosting</span>
-                      <Badge variant="secondary" className="text-xs w-fit">Variable</Badge>
-                    </div>
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 sm:p-8 rounded-xl shadow-inner">
+              <h4 className="font-bold text-gray-900 mb-6 text-lg flex items-center gap-3">
+                <BarChart3 className="w-6 h-6" />
+                System Resource Requirements & Third-Party Dependencies
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <h5 className="font-bold text-gray-800 text-base">External APIs & Services</h5>
+                  <div className="space-y-3 text-sm">
+                    {[
+                      { service: "OpenAI API", cost: "$0.01-0.03/1K tokens" },
+                      { service: "ElevenLabs TTS", cost: "$0.30/1K chars" },
+                      { service: "Twilio Voice", cost: "$0.013/min" },
+                      { service: "AWS/GCP Hosting", cost: "Variable" }
+                    ].map((item, i) => (
+                      <div key={i} className="flex flex-col sm:flex-row sm:justify-between p-3 bg-white rounded-lg border shadow-sm gap-2">
+                        <span className="font-medium">{item.service}</span>
+                        <Badge variant="secondary" className="text-xs w-fit">{item.cost}</Badge>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="space-y-4">
-                  <h5 className="font-semibold text-gray-800 text-sm sm:text-base">Infrastructure Components</h5>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>Load Balancer</span>
-                      <Badge variant="secondary" className="text-xs w-fit">High Availability</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>Database Cluster</span>
-                      <Badge variant="secondary" className="text-xs w-fit">PostgreSQL</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>Cache Layer</span>
-                      <Badge variant="secondary" className="text-xs w-fit">Redis</Badge>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between p-2 bg-white rounded border gap-1">
-                      <span>Monitoring</span>
-                      <Badge variant="secondary" className="text-xs w-fit">DataDog/NewRelic</Badge>
-                    </div>
+                <div className="space-y-6">
+                  <h5 className="font-bold text-gray-800 text-base">Infrastructure Components</h5>
+                  <div className="space-y-3 text-sm">
+                    {[
+                      { component: "Load Balancer", spec: "High Availability" },
+                      { component: "Database Cluster", spec: "PostgreSQL" },
+                      { component: "Cache Layer", spec: "Redis" },
+                      { component: "Monitoring", spec: "DataDog/NewRelic" }
+                    ].map((item, i) => (
+                      <div key={i} className="flex flex-col sm:flex-row sm:justify-between p-3 bg-white rounded-lg border shadow-sm gap-2">
+                        <span className="font-medium">{item.component}</span>
+                        <Badge variant="secondary" className="text-xs w-fit">{item.spec}</Badge>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

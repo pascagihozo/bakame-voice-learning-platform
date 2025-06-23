@@ -1,5 +1,7 @@
 import React from 'react';
-import { Phone, Globe, Database, Cloud, Shield, Zap, Users, Server, Lock, Languages, Volume2, Mic, Headphones, Brain, BarChart3 } from 'lucide-react';
+import { Phone, Globe, Database, Cloud, Shield, Zap, Users, Server, Lock, Languages, Volume2, Mic, Headphones, Brain, BarChart3, MessageCircle } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const SystemFlowDiagram = () => {
   return (

@@ -1,35 +1,5 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { 
-  Phone, 
-  Smartphone, 
-  Server, 
-  Database, 
-  Wifi, 
-  WifiOff, 
-  Zap, 
-  Users, 
-  Globe, 
-  MessageCircle, 
-  Volume2, 
-  Languages,
-  ArrowRight,
-  ArrowDown,
-  ChevronRight,
-  Play,
-  Pause,
-  RotateCcw,
-  Cloud,
-  Cpu,
-  HardDrive,
-  Network,
-  Shield,
-  CheckCircle,
-  AlertTriangle,
-  Clock
-} from "lucide-react";
+import React from 'react';
+import { Phone, Globe, Database, Cloud, Shield, Zap, Users, Server, Lock, Languages, Volume2, Mic, Headphones, Brain, BarChart3 } from 'lucide-react';
 
 const SystemFlowDiagram = () => {
   return (
